@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Low Timothy — Data Scientist</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f7f5f2;
+      --surface: #ffffff;
+      --text: #1a1814;
+      --muted: #6b6760;
+      --accent: #1d4ed8;
+      --accent-light: #eff4ff;
+      --border: #e4e0da;
+      --tag-bg: #eef2ff;
+      --tag-text: #2f4aaf;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(247, 245, 242, 0.9);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+    }
+    .nav-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.1rem;
+      letter-spacing: 0.01em;
+      color: var(--text);
+      text-decoration: none;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.875rem;
+      font-weight: 400;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.03em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    /* SECTIONS */
+    section { padding: 5rem 0; }
+    .container { max-width: 860px; margin: 0 auto; padding: 0 2rem; }
+
+    /* HERO */
+    #hero {
+      padding: 7rem 0 5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .hero-inner {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+    .hero-eyebrow {
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.2rem;
+    }
+    .hero-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      margin-bottom: 1.5rem;
+    }
+    .hero-name em {
+      font-style: italic;
+      color: var(--muted);
+    }
+    .hero-bio {
+      font-size: 1.1rem;
+      color: var(--muted);
+      max-width: 540px;
+      line-height: 1.75;
+      margin-bottom: 2.5rem;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: var(--accent);
+      color: #fff;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.875rem;
+      font-weight: 500;
+      padding: 0.7rem 1.5rem;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .btn-primary:hover { opacity: 0.85; }
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: transparent;
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.875rem;
+      font-weight: 400;
+      padding: 0.7rem 1.5rem;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      text-decoration: none;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .btn-secondary:hover { border-color: #aaa; background: var(--surface); }
+
+    /* SECTION LABELS */
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+    .section-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      line-height: 1.15;
+      letter-spacing: -0.01em;
+      margin-bottom: 3rem;
+    }
+
+    /* DIVIDER */
+    .section-divider { border: none; border-top: 1px solid var(--border); }
+
+    /* ABOUT */
+    #about { border-bottom: 1px solid var(--border); }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .about-text p {
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+    .about-text p:last-child { margin-bottom: 0; }
+    .about-meta { }
+    .meta-item {
+      padding: 1.2rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .meta-item:first-child { border-top: 1px solid var(--border); }
+    .meta-label {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.25rem;
+    }
+    .meta-value {
+      font-size: 0.95rem;
+      color: var(--text);
+    }
+
+    /* EXPERIENCE */
+    #experience { border-bottom: 1px solid var(--border); }
+    .timeline { position: relative; }
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 2rem;
+      padding: 2.5rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .timeline-item:last-child { border-bottom: none; }
+    .timeline-date {
+      font-size: 0.82rem;
+      color: var(--muted);
+      padding-top: 0.2rem;
+      line-height: 1.5;
+    }
+    .timeline-date span {
+      display: block;
+      font-weight: 500;
+      color: var(--accent);
+      margin-bottom: 0.2rem;
+    }
+    .timeline-content h3 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.25rem;
+      font-weight: 400;
+      margin-bottom: 0.2rem;
+    }
+    .timeline-company {
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: 0.8rem;
+    }
+    .timeline-desc {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+    .timeline-desc ul {
+      padding-left: 1.2rem;
+      margin-top: 0.5rem;
+    }
+    .timeline-desc li { margin-bottom: 0.3rem; }
+
+    /* SKILLS */
+    #skills { border-bottom: 1px solid var(--border); }
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+    .skill-group h3 {
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1rem;
+    }
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .skill-tag {
+      font-size: 0.82rem;
+      background: var(--tag-bg);
+      color: var(--tag-text);
+      padding: 0.3rem 0.75rem;
+      border-radius: 4px;
+      font-weight: 400;
+    }
+
+    /* PROJECTS */
+    #projects { border-bottom: 1px solid var(--border); }
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+    .project-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.8rem;
+      transition: border-color 0.2s;
+    }
+    .project-card:hover { border-color: #aaa; }
+    .project-card.placeholder {
+      border-style: dashed;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      min-height: 180px;
+    }
+    .project-tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 500;
+      background: var(--tag-bg);
+      color: var(--tag-text);
+      padding: 0.2rem 0.6rem;
+      border-radius: 3px;
+      margin-bottom: 0.8rem;
+      letter-spacing: 0.04em;
+    }
+    .project-card h3 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.15rem;
+      font-weight: 400;
+      margin-bottom: 0.5rem;
+    }
+    .project-card p {
+      font-size: 0.875rem;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+    .placeholder-icon {
+      font-size: 2rem;
+      margin-bottom: 0.75rem;
+      opacity: 0.3;
+    }
+    .placeholder-text {
+      font-size: 0.875rem;
+      color: var(--muted);
+    }
+
+    /* CONTACT */
+    #contact { }
+    .contact-inner {
+      max-width: 560px;
+    }
+    .contact-inner p {
+      color: var(--muted);
+      margin-bottom: 2rem;
+      font-size: 1.05rem;
+    }
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 1.25rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      text-decoration: none;
+      color: var(--text);
+      font-size: 0.9rem;
+      transition: border-color 0.2s;
+    }
+    .contact-link:hover { border-color: #aaa; }
+    .contact-link-label {
+      font-weight: 500;
+    }
+    .contact-link-value {
+      color: var(--muted);
+      font-size: 0.85rem;
+      margin-top: 0.1rem;
+    }
+    .contact-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 6px;
+      background: var(--accent-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .contact-icon svg { width: 16px; height: 16px; stroke: var(--accent); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem;
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 680px) {
+      .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .timeline-item { grid-template-columns: 1fr; gap: 0.5rem; }
+      .skills-grid { grid-template-columns: 1fr 1fr; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+    }
+
+    /* FADE IN */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .hero-eyebrow { animation: fadeUp 0.5s ease both; }
+    .hero-name    { animation: fadeUp 0.5s 0.1s ease both; }
+    .hero-bio     { animation: fadeUp 0.5s 0.2s ease both; }
+    .hero-actions { animation: fadeUp 0.5s 0.3s ease both; }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#hero" class="nav-name">Low Timothy</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-inner">
+      <p class="hero-eyebrow">Based in Singapore</p>
+      <h1 class="hero-name">Low<br /><em>Timothy</em></h1>
+      <p class="hero-bio">
+        Data Scientist with a background in Sales Operations analytics. I turn messy data into clear decisions — through modelling, analysis, and storytelling that actually lands.
+      </p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-primary">Get in touch</a>
+        <a href="#experience" class="btn-secondary">View my experience</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="container">
+      <p class="section-label">About Me</p>
+      <div class="about-grid">
+        <div class="about-text">
+          <p>
+            I'm a Data Scientist based in Singapore with a career that bridges commercial operations and advanced analytics. Before moving into data science, I spent time in Sales Operations as a data analyst — giving me a sharp instinct for how data decisions translate into real business outcomes.
+          </p>
+          <p>
+            I enjoy the full workflow: cleaning and exploring data, building models, and communicating findings in a way that drives action. I believe that the best data work is invisible — it just makes things work better.
+          </p>
+          <p>
+            Outside of work, I'm always looking to sharpen my craft, explore new tools, and stay curious about what's next in the data space.
+          </p>
+        </div>
+        <div class="about-meta">
+          <div class="meta-item">
+            <p class="meta-label">Current Role</p>
+            <p class="meta-value">Data Scientist</p>
+          </div>
+          <div class="meta-item">
+            <p class="meta-label">Location</p>
+            <p class="meta-value">Singapore</p>
+          </div>
+          <div class="meta-item">
+            <p class="meta-label">Background</p>
+            <p class="meta-value">Sales Operations & Analytics</p>
+          </div>
+          <div class="meta-item">
+            <p class="meta-label">Open to</p>
+            <p class="meta-value">Data Science · Analytics · Consulting</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="container">
+      <p class="section-label">Experience</p>
+      <h2 class="section-title">Where I've worked</h2>
+      <div class="timeline">
+
+        <div class="timeline-item">
+          <div class="timeline-date">
+            <span>Current</span>
+            Data Scientist
+          </div>
+          <div class="timeline-content">
+            <h3>Data Scientist</h3>
+            <p class="timeline-company">Your Current Company · Singapore</p>
+            <div class="timeline-desc">
+              <ul>
+                <li>Update this with your actual responsibilities and achievements.</li>
+                <li>Highlight specific models, tools, or impact you've delivered.</li>
+                <li>Quantify where possible — e.g. "reduced X by 30%".</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-date">
+            <span>Previous</span>
+            Sales Ops Analyst
+          </div>
+          <div class="timeline-content">
+            <h3>Sales Operations Data Analyst</h3>
+            <p class="timeline-company">Your Previous Company · Singapore</p>
+            <div class="timeline-desc">
+              <ul>
+                <li>Update this with your responsibilities in your Sales Ops role.</li>
+                <li>Describe the tools you used — CRM, SQL, BI dashboards, etc.</li>
+                <li>Mention any process improvements or reporting frameworks you built.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="container">
+      <p class="section-label">Skills</p>
+      <h2 class="section-title">What I work with</h2>
+      <div class="skills-grid">
+        <div class="skill-group">
+          <h3>Languages</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">Python</span>
+            <span class="skill-tag">SQL</span>
+            <span class="skill-tag">R</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <h3>Data & ML</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">Pandas</span>
+            <span class="skill-tag">Scikit-learn</span>
+            <span class="skill-tag">NumPy</span>
+            <span class="skill-tag">XGBoost</span>
+            <span class="skill-tag">Feature Engineering</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <h3>Visualisation & BI</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">Tableau</span>
+            <span class="skill-tag">Power BI</span>
+            <span class="skill-tag">Matplotlib</span>
+            <span class="skill-tag">Seaborn</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <h3>Data Engineering</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">dbt</span>
+            <span class="skill-tag">Airflow</span>
+            <span class="skill-tag">BigQuery</span>
+            <span class="skill-tag">Snowflake</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <h3>Tools & Platforms</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">Git</span>
+            <span class="skill-tag">Jupyter</span>
+            <span class="skill-tag">VS Code</span>
+            <span class="skill-tag">Salesforce</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <h3>Domain</h3>
+          <div class="skill-tags">
+            <span class="skill-tag">Sales Analytics</span>
+            <span class="skill-tag">Forecasting</span>
+            <span class="skill-tag">A/B Testing</span>
+            <span class="skill-tag">Data Storytelling</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="container">
+      <p class="section-label">Projects</p>
+      <h2 class="section-title">Things I've built</h2>
+      <div class="projects-grid">
+
+        <div class="project-card placeholder">
+          <div class="placeholder-icon">＋</div>
+          <p class="placeholder-text">Add your first project here — a model, dashboard, analysis, or side project.</p>
+        </div>
+
+        <div class="project-card placeholder">
+          <div class="placeholder-icon">＋</div>
+          <p class="placeholder-text">Even a personal project or Kaggle submission works great here.</p>
+        </div>
+
+      </div>
+      <p style="margin-top: 1.5rem; font-size: 0.85rem; color: var(--muted);">Projects coming soon — check back later.</p>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="container">
+      <p class="section-label">Contact</p>
+      <h2 class="section-title">Let's connect</h2>
+      <div class="contact-inner">
+        <p>Whether it's a role, a collaboration, or just a conversation about data — feel free to reach out.</p>
+        <div class="contact-links">
+
+          <a href="mailto:your@email.com" class="contact-link">
+            <div class="contact-icon">
+              <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <div>
+              <p class="contact-link-label">Email</p>
+              <p class="contact-link-value">your@email.com</p>
+            </div>
+          </a>
+
+          <a href="https://linkedin.com/in/yourprofile" target="_blank" class="contact-link">
+            <div class="contact-icon">
+              <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            </div>
+            <div>
+              <p class="contact-link-label">LinkedIn</p>
+              <p class="contact-link-value">linkedin.com/in/yourprofile</p>
+            </div>
+          </a>
+
+          <a href="https://github.com/yourusername" target="_blank" class="contact-link">
+            <div class="contact-icon">
+              <svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            </div>
+            <div>
+              <p class="contact-link-label">GitHub</p>
+              <p class="contact-link-value">github.com/yourusername</p>
+            </div>
+          </a>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2026 Low Timothy · Built with HTML & hosted on GitHub Pages</p>
+  </footer>
+
+</body>
+</html>

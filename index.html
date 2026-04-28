@@ -47,6 +47,7 @@
 
     html {
       scroll-behavior: smooth;
+      overflow-x: hidden;
     }
 
     body {
@@ -56,6 +57,8 @@
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+      width: 100%;
     }
 
     .container {
@@ -472,6 +475,8 @@
       line-height: 1.7;
       padding-left: 1.1rem;
       margin: 0;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
     }
 
     .role-bullets li {
@@ -553,6 +558,8 @@
       font-size: 15px;
       line-height: 1.75;
       margin: 0 0 1rem;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
     }
 
     .project-outcome {
@@ -583,6 +590,8 @@
       color: var(--text-muted);
       margin: 0 0 1.25rem;
       font-family: 'SF Mono', Menlo, Monaco, Consolas, monospace;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
     }
 
     .project-stack-label {
@@ -813,14 +822,30 @@
         padding: 2rem 0;
       }
       .hero-card {
-        padding: 2.5rem 1.75rem;
+        padding: 2.5rem 1.5rem;
       }
       .hero-card::before {
         top: 1rem;
         right: 1rem;
       }
+      .hero h1 {
+        font-size: clamp(32px, 9vw, 44px);
+      }
+      .hero-tagline {
+        font-size: clamp(17px, 4.5vw, 20px);
+      }
+      .container {
+        padding: 0 1.25rem;
+      }
+      nav {
+        padding: 1rem 0;
+      }
       nav ul {
-        gap: 1.25rem;
+        gap: 1rem;
+        font-size: 13px;
+      }
+      nav ul a {
+        font-size: 13px;
       }
       .timeline {
         padding-left: 1.75rem;
@@ -829,7 +854,44 @@
         left: -1.75rem;
       }
       .project-card {
-        padding: 1.5rem 1.5rem;
+        padding: 1.5rem 1.25rem;
+      }
+      .cert-card {
+        padding: 1.5rem 1.25rem;
+        gap: 1rem;
+      }
+      .cert-mark {
+        width: 44px;
+        height: 44px;
+        font-size: 22px;
+      }
+      .role-dates {
+        white-space: normal;
+      }
+      .role-bullets {
+        padding-left: 1rem;
+      }
+      .section-heading {
+        font-size: clamp(24px, 6vw, 32px);
+      }
+      .hero-buttons {
+        gap: 8px;
+      }
+      .btn {
+        padding: 11px 18px;
+        font-size: 13px;
+      }
+    }
+
+    @media (max-width: 380px) {
+      nav ul {
+        gap: 0.75rem;
+      }
+      nav ul a {
+        font-size: 12px;
+      }
+      .hero-card {
+        padding: 2rem 1.25rem;
       }
     }
   </style>
